@@ -19,8 +19,9 @@
 #' @export
 #' @examples
 #' cytoloc <- GetCytoLocation(cyto_feature = "chr20(q11.1-q13.1)")
-#' ### exprout <- GetExprCountCyto(cytoloc_output = cytoloc, Counts = Counts, normalization = TRUE, qt_cutoff = 0.99)
-#' ### status <- partCNVH(int_counts = exprout$ProcessedCount, cyto_type = "del", cyto_p = 0.2, navg = 50)
+#' data(SimData)
+#' exprout <- GetExprCountCyto(cytoloc_output = cytoloc, Counts = as.matrix(SimData), normalization = TRUE, qt_cutoff = 0.99)
+#' status <- partCNVH(int_counts = exprout$ProcessedCount, cyto_type = "del", cyto_p = 0.2, navg = 50)
 #'
 partCNVH <- function(int_counts,
                      cyto_type,
