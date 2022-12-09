@@ -1,5 +1,5 @@
 # partCNV
-An R package written by Dr. Ziyi Li to improve the detection of locally aneuploid cells by incorporating cytogenetics information.
+An R package written by **Dr. Ziyi Li** to improve the detection of locally aneuploid cells by incorporating cytogenetics information.
 
 # Introduction
 
