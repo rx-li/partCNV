@@ -21,7 +21,8 @@
 #' @export
 #' @examples
 #' res <- GetCytoLocation(cyto_feature = "chr20(q11.1-q13.1)")
-#' ### GetExprCountCyto(cytoloc_output = res, Counts = Counts, normalization = TRUE, qt_cutoff = 0.99)
+#' data(SimData)
+#' GetExprCountCyto(cytoloc_output = res, Counts = as.matrix(SimData), normalization = TRUE, qt_cutoff = 0.99)
 #'
 GetExprCountCyto <- function(cytoloc_output,
                              Counts = NULL,

@@ -106,7 +106,7 @@ sim_seurat$partCNV_label <- factor(sim_seurat$partCNV_label, levels = c(1,0), la
 
 ```{r s6, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
 library(ggplot2)
-DimPlot(sim_seurat, reduction = "umap", group = "partCNV_label") + ggtitle(paste0("partCNV (", signif(p1,2)*100, "%)"))+ theme(legend.position = "none")
+DimPlot(sim_seurat, reduction = "umap", group = "partCNV_label") + ggtitle(paste0("partCNV (", signif(p1,2)*100, "%)"))
 ```
 
 # Run partCNVH
@@ -159,7 +159,7 @@ sim_seurat$partCNVH_label <- factor(sim_seurat$partCNVH_label, levels = c(1,0), 
 
 ```{r s16, echo=TRUE, eval=TRUE, message=FALSE, warning=FALSE}
 library(ggplot2)
-DimPlot(sim_seurat, reduction = "umap", group = "partCNVH_label") + ggtitle(paste0("partCNVH (", signif(p2,2)*100, "%)"))+ theme(legend.position = "none")
+DimPlot(sim_seurat, reduction = "umap", group = "partCNVH_label") + ggtitle(paste0("partCNVH (", signif(p2,2)*100, "%)"))
 ```
 
 # Session info {.unnumbered}

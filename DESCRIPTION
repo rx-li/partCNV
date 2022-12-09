@@ -6,11 +6,11 @@ Authors@R: c(
 	person(given="Ziyi", family="Li", email="zli16@mdanderson.org", role=c("aut", "cre", "ctb")),
 	person(given="Ruoxing", family="Li", email="ruoxingli@outlook.com", role="ctb"))
 Description: This package uses a statistical framework for rapid and accurate detection of aneuploid cells with local copy number deletion or amplification. Our method uses an EM algorithm with mixtures of Poisson distributions while incorporating cytogenetics information (e.g., regional deletion or amplification) to guide the classification (partCNV). When applicable, we further improve the accuracy by integrating a Hidden Markov Model for feature selection (partCNVH).
-Imports: stats, data.table, depmixS4, Seurat, Matrix, GenomicRanges
+Imports: stats, data.table, depmixS4, Seurat, Matrix, GenomicRanges, AnnotationHub
 Suggests: BiocStyle, rmarkdown, knitr, IRanges
 VignetteBuilder: knitr
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.2
 biocViews: Software, CopyNumberVariation, HiddenMarkovModel

@@ -20,6 +20,8 @@
 #' when cyto_feature is null.
 #' @param end ending location of the interested region. This is only used
 #' when cyto_feature is null.
+#' 
+#' @import AnnotationHub
 #'
 #' @return If the first format of cyto_feature is provided, the starting and
 #' ending location as well as the number of genes overlapped with be provided.
@@ -40,10 +42,11 @@ GetCytoLocation <- function(cyto_feature = NULL,
                             start = NULL,
                             end = NULL) {
 
+    gene <- data.frame(AnnotationHub()[["AH53178"]])
+    cytoBand_Hg38 <- gene[, c("seqnames", "start", "end", "name", "gieStain")]
+    colnames(cytoBand_Hg38) <- c("chr", "start", "end", "cytoband", "V5")  
+    
     Hg38_gtf <- NULL
-    cytoBand_Hg38 <- NULL
-
-    data("cytoBand_Hg38", envir=environment())
     data("Hg38_gtf", envir=environment())
 
     GeneNum_index <- 0
