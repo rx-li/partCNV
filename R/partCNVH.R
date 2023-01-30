@@ -41,8 +41,8 @@ partCNVH <- function(int_counts,
                      maxniter = maxniter)
 
     if(cyto_type == "del") {
-        meanratio = rowMeans(int_counts[, EMlabel == 0])/rowMeans(int_counts[, EMlabel == 1])
-        meanratio2 = data.table::frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
+        meanratio <- rowMeans(int_counts[, EMlabel == 0])/rowMeans(int_counts[, EMlabel == 1])
+        meanratio2 <- data.table::frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
         mysumdata <- data.frame(rowmean = meanratio2)
         initStatus <- rep(1, length(mysumdata$rowmean))
         initStatus[mysumdata$rowmean > stats::median(mysumdata$rowmean)] <- 2
@@ -51,13 +51,13 @@ partCNVH <- function(int_counts,
         est.states <- depmixS4::posterior(fit.mod)
 
         if(mean(mysumdata$rowmean[est.states$state == 2], na.rm = TRUE) < mean(mysumdata$rowmean[est.states$state == 1], na.rm = TRUE)) {
-            myidealstate = 1
+            myidealstate <- 1
         } else {
-            myidealstate = 2
+            myidealstate <- 2
         }
     } else if(cyto_type == "amp") {
-        meanratio = rowMeans(int_counts[, EMlabel == 1])/rowMeans(int_counts[, EMlabel == 0])
-        meanratio2 = data.table::frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
+        meanratio <- rowMeans(int_counts[, EMlabel == 1])/rowMeans(int_counts[, EMlabel == 0])
+        meanratio2 <- data.table::frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
         mysumdata <- data.frame(rowmean = meanratio2)
         initStatus <- rep(1, length(mysumdata$rowmean))
         initStatus[mysumdata$rowmean > stats::median(mysumdata$rowmean)] <- 2
@@ -66,9 +66,9 @@ partCNVH <- function(int_counts,
         est.states <- depmixS4::posterior(fit.mod)
 
         if(mean(mysumdata$rowmean[est.states$state == 2], na.rm = TRUE) < mean(mysumdata$rowmean[est.states$state == 1], na.rm = TRUE)) {
-            myidealstate = 1
+            myidealstate <- 1
         } else {
-            myidealstate = 2
+            myidealstate <- 2
         }
     }
 

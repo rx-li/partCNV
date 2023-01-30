@@ -34,12 +34,12 @@ partCNV <- function(int_counts,
     int_counts <- round(as.matrix(int_counts))
 
     ### initialization with PCA+louvian
-    input = int_counts
+    input <- int_counts
     if(is.null(rownames(int_counts))) {
-        rownames(input) = paste0("gene", 1:nrow(input))
+        rownames(input) <- paste0("gene", 1:nrow(input))
     }
     if(is.null(colnames(int_counts))) {
-        colnames(input) = paste0("cell", 1:ncol(input))
+        colnames(input) <- paste0("cell", 1:ncol(input))
     }
     sim <- Seurat::CreateSeuratObject(counts = input, project = "sim", min.cells = 0, min.features = 0)
     sim <- Seurat::NormalizeData(sim)
@@ -47,12 +47,12 @@ partCNV <- function(int_counts,
     sim <- Seurat::RunPCA(sim, features = rownames(input))
     sim <- Seurat::FindNeighbors(sim, dims = 1:10)
     reso_vec <- seq(0.001, 0.5, by = 0.01)
-    K = 1
-    j = 1
+    K <- 1
+    j <- 1
     while(K == 1) {
         sim <- Seurat::FindClusters(sim, resolution = reso_vec[j], algorithm = 1)
-        j = j + 1
-        K = length(unique(Seurat::Idents(sim)))
+        j <- j + 1
+        K <- length(unique(Seurat::Idents(sim)))
     }
     cellZ <- Seurat::Idents(sim)
 
@@ -78,8 +78,8 @@ partCNV <- function(int_counts,
     pi_old <- rep(0, length(cellZ))
     diff_p <- 10
     niter <- 1
-    Ci = rep(0, length(cellZ))
-    diff_prp = 10
+    Ci <- rep(0, length(cellZ))
+    diff_prp <- 10
     ### update the parameters
     while(diff_p > 10^-5 & diff_prp > 10^-5 & niter < maxniter) {
         pi_old <- pi
@@ -118,12 +118,12 @@ partCNV <- function(int_counts,
         Ctotal <- sum(Ci)
 
         if(Ctotal == 0 | Ctotal == ncol(int_counts)) {
-            cutoff = stats::quantile(pi, qi)
+            cutoff <- stats::quantile(pi, qi)
             Ci <- ifelse(pi >= cutoff, 1, 0)
             Ctotal <- sum(Ci)
         }
 
-        niter = niter + 1
+        niter <- niter + 1
         diff_p <- abs(sum(pi - pi_old))
         diff_prp <- sum(abs(Ci - Cold))/ncell
         print(paste0("qi = ", qi))
