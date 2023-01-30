@@ -126,14 +126,14 @@ partCNV <- function(int_counts,
         niter <- niter + 1
         diff_p <- abs(sum(pi - pi_old))
         diff_prp <- sum(abs(Ci - Cold))/ncell
-        print(paste0("qi = ", qi))
-        print(paste0("diff_p = ", diff_p))
-        print(Ctotal/ncell)
+        message(paste0("qi = ", qi))
+        message(paste0("diff_p = ", diff_p))
+        message(Ctotal/ncell)
     }
 
     if (tolower(cyto_type) == "amp") {
         Ci <- 1 - Ci
-        print(sum(Ci)/ncell)
+        message(sum(Ci)/ncell)
     }
 
     return(Ci)

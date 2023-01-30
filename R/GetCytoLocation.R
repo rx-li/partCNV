@@ -64,7 +64,7 @@ GetCytoLocation <- function(cyto_feature = NULL,
                 message(paste0("Print out all cytogenetics features on ", cyto_feature, ":"))
                 tmpout <- cytoBand_Hg38[grep(cyto_feature, cytoBand_Hg38$chr), ]
                 rownames(tmpout) <- NULL
-                print(tmpout)
+                message(tmpout)
                 return(list(cytogeneticsInfo = tmpout,
                             Downstream_index = Downstream_index))
             }
