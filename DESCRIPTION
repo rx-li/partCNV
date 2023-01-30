@@ -11,6 +11,5 @@ Suggests: BiocStyle, rmarkdown, knitr, IRanges
 VignetteBuilder: knitr
 License: GPL-2
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.2.2
-biocViews: Software, CopyNumberVariation, HiddenMarkovModel
+biocViews: Software, CopyNumberVariation, HiddenMarkovModel, SingleCell, Classification
