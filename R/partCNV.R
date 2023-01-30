@@ -36,16 +36,16 @@ partCNV <- function(int_counts,
     ### initialization with PCA+louvian
     input <- int_counts
     if(is.null(rownames(int_counts))) {
-        rownames(input) <- paste0("gene", 1:nrow(input))
+        rownames(input) <- paste0("gene", seq_len(nrow(input)))
     }
     if(is.null(colnames(int_counts))) {
-        colnames(input) <- paste0("cell", 1:ncol(input))
+        colnames(input) <- paste0("cell", seq_len(ncol(input)))
     }
     sim <- Seurat::CreateSeuratObject(counts = input, project = "sim", min.cells = 0, min.features = 0)
     sim <- Seurat::NormalizeData(sim)
     sim <- Seurat::ScaleData(sim, features = rownames(input))
     sim <- Seurat::RunPCA(sim, features = rownames(input))
-    sim <- Seurat::FindNeighbors(sim, dims = 1:10)
+    sim <- Seurat::FindNeighbors(sim, dims = seq_len(10))
     reso_vec <- seq(0.001, 0.5, by = 0.01)
     K <- 1
     j <- 1
