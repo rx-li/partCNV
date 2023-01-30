@@ -61,7 +61,7 @@ GetCytoLocation <- function(cyto_feature = NULL,
             if(length(grep(cyto_feature, cytoBand_Hg38$chr)) == 0) {
                 stop("Please provide a valid cyto_feature input!")
             } else {
-                message(paste0("Print out all cytogenetics features on ", cyto_feature, ":"))
+                message("Print out all cytogenetics features on ", cyto_feature, ":")
                 tmpout <- cytoBand_Hg38[grep(cyto_feature, cytoBand_Hg38$chr), ]
                 rownames(tmpout) <- NULL
                 message(tmpout)
@@ -116,8 +116,8 @@ GetCytoLocation <- function(cyto_feature = NULL,
         FOout <- as.data.frame(GenomicRanges::findOverlaps(cyto.gr, gene.gr))
         overGene <- unique(Hg38_gtf$gene_id[unique(FOout$subjectHits)])
         overGeneName <- unique(Hg38_gtf$gene_name[unique(FOout$subjectHits)])
-        message(paste0("Interested region: ", chr_location, ":", cyto_start, "-", cyto_end, "."))
-        message(paste0("A total of ", length(overGeneName), " genes are located in this region."))
+        message("Interested region: ", chr_location, ":", cyto_start, "-", cyto_end, ".")
+        message("A total of ", length(overGeneName), " genes are located in this region.")
         Downstream_index <- 1
 
         return(list(chr_location = chr_location,

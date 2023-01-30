@@ -126,8 +126,8 @@ partCNV <- function(int_counts,
         niter <- niter + 1
         diff_p <- abs(sum(pi - pi_old))
         diff_prp <- sum(abs(Ci - Cold))/ncell
-        message(paste0("qi = ", qi))
-        message(paste0("diff_p = ", diff_p))
+        message("qi = ", qi)
+        message("diff_p = ", diff_p)
         message(Ctotal/ncell)
     }
 

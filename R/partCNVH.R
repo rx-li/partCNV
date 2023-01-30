@@ -31,7 +31,7 @@ partCNVH <- function(int_counts,
                      navg = 50) {
 
     if (nrow(int_counts) <= 20) {
-        warning(paste0("The number of genes is only ", nrow(int_counts), ". It maybe better to use partCNV only."))
+        warning("The number of genes is only ", nrow(int_counts), ". It maybe better to use partCNV only.")
     }
 
     EMlabel <- partCNV(int_counts = int_counts,
