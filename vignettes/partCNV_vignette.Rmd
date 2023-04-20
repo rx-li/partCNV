@@ -54,10 +54,10 @@ library(Seurat)
 Seurat_obj <- NormalizeData(Your_SeuratObj, normalization.method = "LogNormalize", scale.factor = 10000)
 Counts = Seurat_obj@assays$RNA@counts
 ```
-If you start with a SingleCellExperiment object, the counts can be extracted and using in the following steps. 
+If you start with a SingleCellExperiment object, the counts can be normalized using function `NormalizeCounts`.
 
 ```{r, echo=TRUE, eval=FALSE}
-count <- as.matrix(Your_SingleCellExperiment@assays@data@listData[[1]])
+Counts <- NormalizeCounts(Your_SingleCellExperimentObj, scale_factor=10000)
 ```
 
 # Run partCNV

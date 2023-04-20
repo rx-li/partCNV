@@ -2,7 +2,9 @@
 
 export(GetCytoLocation)
 export(GetExprCountCyto)
+export(NormalizeCounts)
 export(partCNV)
 export(partCNVH)
 import(AnnotationHub)
 import(Matrix)
+importFrom(SingleCellExperiment,SingleCellExperiment)
