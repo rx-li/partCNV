@@ -21,7 +21,7 @@
 #' @param end ending location of the interested region. This is only used
 #' when cyto_feature is null.
 #' 
-#' @import AnnotationHub
+#' @importFrom AnnotationHub AnnotationHub
 #'
 #' @return If the first format of cyto_feature is provided, the starting and
 #' ending location as well as the number of genes overlapped with be provided.
