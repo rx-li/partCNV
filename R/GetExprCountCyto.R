@@ -22,7 +22,8 @@
 #' @examples
 #' res <- GetCytoLocation(cyto_feature = "chr20(q11.1-q13.1)")
 #' data(SimData)
-#' GetExprCountCyto(cytoloc_output = res, Counts = as.matrix(SimData), normalization = TRUE, qt_cutoff = 0.99)
+#' GetExprCountCyto(cytoloc_output = res, Counts = as.matrix(SimData), normalization = TRUE, 
+#' qt_cutoff = 0.99)
 #'
 GetExprCountCyto <- function(cytoloc_output,
                              Counts = NULL,
@@ -45,8 +46,8 @@ GetExprCountCyto <- function(cytoloc_output,
             rownames(normalizedCounts) <- rownames(Counts)
         }
 
-        fCounts <- normalizedCounts[stats::na.omit(match(cytoloc_output$overGeneName, rownames(normalizedCounts))), ]
-        tmpGL <- Hg38_gtf[match(rownames(fCounts), Hg38_gtf$gene_name), ]
+        fCounts <- normalizedCounts[stats::na.omit(base::match(cytoloc_output$overGeneName, rownames(normalizedCounts))), ]
+        tmpGL <- Hg38_gtf[base::match(rownames(fCounts), Hg38_gtf$gene_name), ]
         GeneLocation <- tmpGL$start
         fCounts_ord <- fCounts[order(GeneLocation),]
         GeneLocation_ord <- GeneLocation[order(GeneLocation)]
