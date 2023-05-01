@@ -10,6 +10,9 @@ A SingleCellExperiment object
 \usage{
 data(SimDataSce)
 }
+\value{
+Simulation SingleCellExperiment object to examplify the usage of the method
+}
 \description{
 Simulation SingleCellExperiment object to examplify the usage of the method
 }
