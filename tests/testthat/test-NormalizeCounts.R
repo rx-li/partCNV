@@ -1,7 +1,6 @@
 test_that("NormalizeCounts", {
-  data(SimData)
-  sce <- SingleCellExperiment(SimData)
-  counts <- NormalizeCounts(sce)
+  data(SimDataSce)
+  counts <- NormalizeCounts(SimDataSce)
   
-  expect_type(counts, "S4")
+  expect_type(counts, "double")
 })

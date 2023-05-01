@@ -19,9 +19,8 @@ A normalized gene expression counts matrix.
 This function helps normalize the gene expression count matrix for a SingleCellExperiment object.
 }
 \examples{
-counts <- matrix(rpois(100, lambda = 10), ncol=10, nrow=10)
-sce <- SingleCellExperiment::SingleCellExperiment(counts)
-counts_mat <- NormalizeCounts(sce)
+data(SimDataSce)
+counts_mat <- NormalizeCounts(SimDataSce)
 
 
 }

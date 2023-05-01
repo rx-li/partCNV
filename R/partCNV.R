@@ -11,6 +11,8 @@
 #' @param tau The variance of the prior information. Default is 0.1. If you have less confidence,
 #' specify a larger tau, e.g., 10.
 #' @param maxniter The maximum number of iterations of the EM algorithm.
+#' 
+#' @importFrom Seurat CreateSeuratObject NormalizeData ScaleData RunPCA FindNeighbors Idents FindClusters
 #'
 #' @return A vector with the cell status inferred by the method, 1 is aneuploid and 0 is diploid.
 #' @export
@@ -41,20 +43,20 @@ partCNV <- function(int_counts,
     if(is.null(colnames(int_counts))) {
         colnames(input) <- paste0("cell", seq_len(ncol(input)))
     }
-    sim <- Seurat::CreateSeuratObject(counts = input, project = "sim", min.cells = 0, min.features = 0)
-    sim <- Seurat::NormalizeData(sim)
-    sim <- Seurat::ScaleData(sim, features = rownames(input))
-    sim <- Seurat::RunPCA(sim, features = rownames(input))
-    sim <- Seurat::FindNeighbors(sim, dims = seq_len(10))
+    sim <- CreateSeuratObject(counts = input, project = "sim", min.cells = 0, min.features = 0)
+    sim <- NormalizeData(sim)
+    sim <- ScaleData(sim, features = rownames(input))
+    sim <- RunPCA(sim, features = rownames(input))
+    sim <- FindNeighbors(sim, dims = seq_len(10))
     reso_vec <- seq(0.001, 0.5, by = 0.01)
     K <- 1
     j <- 1
     while(K == 1) {
-        sim <- Seurat::FindClusters(sim, resolution = reso_vec[j], algorithm = 1)
+        sim <- FindClusters(sim, resolution = reso_vec[j], algorithm = 1)
         j <- j + 1
-        K <- length(unique(Seurat::Idents(sim)))
+        K <- length(unique(Idents(sim)))
     }
-    cellZ <- Seurat::Idents(sim)
+    cellZ <- Idents(sim)
 
     mres <- tapply(colMeans(int_counts), cellZ, mean)
     qi <- sum(cellZ == names(which.min(mres)))/length(cellZ)

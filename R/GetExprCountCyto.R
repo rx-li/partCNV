@@ -17,7 +17,6 @@
 #'
 #' @return A list with normalized and ordered gene expression for the interested
 #' cytogenetics region.
-#' @import Matrix 
 #' @importFrom magrittr %>%
 #' @export
 #' @examples

@@ -21,7 +21,8 @@
 #' @param end ending location of the interested region. This is only used
 #' when cyto_feature is null.
 #' 
-#' @importFrom AnnotationHub AnnotationHub
+#' @importFrom AnnotationHub AnnotationHub 
+#' @importFrom GenomicRanges GRanges findOverlaps
 #'
 #' @return If the first format of cyto_feature is provided, the starting and
 #' ending location as well as the number of genes overlapped with be provided.
@@ -107,13 +108,13 @@ GetCytoLocation <- function(cyto_feature = NULL,
 
     if(GeneNum_index == 1) {
 
-        gene.gr <- GenomicRanges::GRanges(seqnames = Hg38_gtf$seqnames,
+        gene.gr <- GRanges(seqnames = Hg38_gtf$seqnames,
                                           ranges = IRanges::IRanges(start = as.numeric(Hg38_gtf$start),
                                                                     end = as.numeric(Hg38_gtf$end)))
-        cyto.gr <- GenomicRanges::GRanges(seqnames = chr_location,
+        cyto.gr <- GRanges(seqnames = chr_location,
                                           ranges = IRanges::IRanges(start = cyto_start,
                                                                     end = cyto_end))
-        FOout <- as.data.frame(GenomicRanges::findOverlaps(cyto.gr, gene.gr))
+        FOout <- as.data.frame(findOverlaps(cyto.gr, gene.gr))
         overGene <- unique(Hg38_gtf$gene_id[unique(FOout$subjectHits)])
         overGeneName <- unique(Hg38_gtf$gene_name[unique(FOout$subjectHits)])
         message("Interested region: ", chr_location, ":", cyto_start, "-", cyto_end, ".")

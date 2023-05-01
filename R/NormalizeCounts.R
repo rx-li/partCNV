@@ -8,16 +8,16 @@
 #'
 #' @return A normalized gene expression counts matrix. 
 #' 
-#' @importFrom SingleCellExperiment SingleCellExperiment
+#' @importClassesFrom  SingleCellExperiment SingleCellExperiment
 #' @export
 #' @examples
-#' counts <- matrix(rpois(100, lambda = 10), ncol=10, nrow=10)
-#' sce <- SingleCellExperiment::SingleCellExperiment(counts)
-#' counts_mat <- NormalizeCounts(sce)
+#' data(SimDataSce)
+#' counts_mat <- NormalizeCounts(SimDataSce)
 #' 
 #'
 NormalizeCounts <- function(obj, scale_factor=10000) {
   counts <- obj@assays@data@listData[[1]]
+  counts <- as.matrix(counts)
   counts_normalized <- log1p(scale_factor * sweep(counts, 2, colSums(counts), FUN="/"))
   return(counts_normalized)
 }

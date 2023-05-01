@@ -15,6 +15,9 @@
 #' @param maxniter The maximum number of iterations of the EM algorithm.
 #' @param navg Number of genes used for rolling average.
 #'
+#' @importFrom data.table frollmean
+#' @importFrom depmixS4 depmix fit posterior
+#'  
 #' @return A vector with the cell status inferred by the method, 1 is aneuploid and 0 is diploid.
 #' @export
 #' @examples
@@ -42,13 +45,13 @@ partCNVH <- function(int_counts,
 
     if(cyto_type == "del") {
         meanratio <- rowMeans(int_counts[, EMlabel == 0])/rowMeans(int_counts[, EMlabel == 1])
-        meanratio2 <- data.table::frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
+        meanratio2 <- frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
         mysumdata <- data.frame(rowmean = meanratio2)
         initStatus <- rep(1, length(mysumdata$rowmean))
         initStatus[mysumdata$rowmean > stats::median(mysumdata$rowmean)] <- 2
-        mod <- depmixS4::depmix(rowmean ~ 1, data = mysumdata, nstates = 2, initdata = initStatus, trstart = c(0.9,0.1,0.1,0.9)) # use gaussian() for normally distributed data
+        mod <- depmix(rowmean ~ 1, data = mysumdata, nstates = 2, initdata = initStatus, trstart = c(0.9,0.1,0.1,0.9)) # use gaussian() for normally distributed data
         fit.mod <- depmixS4::fit(mod)
-        est.states <- depmixS4::posterior(fit.mod)
+        est.states <- posterior(fit.mod)
 
         if(mean(mysumdata$rowmean[est.states$state == 2], na.rm = TRUE) < mean(mysumdata$rowmean[est.states$state == 1], na.rm = TRUE)) {
             myidealstate <- 1
@@ -57,13 +60,13 @@ partCNVH <- function(int_counts,
         }
     } else if(cyto_type == "amp") {
         meanratio <- rowMeans(int_counts[, EMlabel == 1])/rowMeans(int_counts[, EMlabel == 0])
-        meanratio2 <- data.table::frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
+        meanratio2 <- frollmean(meanratio, n = navg, na.rm = TRUE, align = "center")
         mysumdata <- data.frame(rowmean = meanratio2)
         initStatus <- rep(1, length(mysumdata$rowmean))
         initStatus[mysumdata$rowmean > stats::median(mysumdata$rowmean)] <- 2
-        mod <- depmixS4::depmix(rowmean ~ 1, data = mysumdata, nstates = 2, initdata = initStatus, trstart = c(0.9,0.1,0.1,0.9)) # use gaussian() for normally distributed data
+        mod <- depmix(rowmean ~ 1, data = mysumdata, nstates = 2, initdata = initStatus, trstart = c(0.9,0.1,0.1,0.9)) # use gaussian() for normally distributed data
         fit.mod <- depmixS4::fit(mod)
-        est.states <- depmixS4::posterior(fit.mod)
+        est.states <- posterior(fit.mod)
 
         if(mean(mysumdata$rowmean[est.states$state == 2], na.rm = TRUE) < mean(mysumdata$rowmean[est.states$state == 1], na.rm = TRUE)) {
             myidealstate <- 1
