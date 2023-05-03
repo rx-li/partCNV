@@ -19,7 +19,7 @@ BiocManager::install("partCNV")
 A developed version can be installed using
 ```
 library(devtools)
-devtools::install_github("rx-li/EasyCellType")
+devtools::install_github("rx-li/partCNV")
 ```
 
 # Understand your cytogenetics data
