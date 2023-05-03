@@ -23,6 +23,21 @@ Single-cell RNA sequencing is becoming an increasingly common tool to investigat
 
 In this package we present partCNV/partCNVH, a statistical framework for rapid and accurate detection of aneuploid cells with local copy number deletion or amplification. Our method uses an EM algorithm with mixtures of Poisson distributions while incorporating **cytogenetics information** to guide the classification (partCNV). When applicable, we further improve the accuracy by integrating a Hidden Markov Model for feature selection (partCNVH).
 
+# Installation
+The package can be installed using `BiocManager` by the following commands
+```{r setup, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("partCNV")
+```
+
+Alternatively, the package can be installed using `devtools` and launched by
+```{r, results=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+library(devtools)
+install_github("rx-li/partCNV")
+```
+
 
 # Understand your cytogenetics data
 
